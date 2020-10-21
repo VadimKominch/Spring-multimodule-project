@@ -1,0 +1,12 @@
+subprojects {
+    apply plugin: "java"
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        compile group: 'org.springframework', name: 'spring-context', version: '5.2.9.RELEASE'
+		testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
+    }
+}
