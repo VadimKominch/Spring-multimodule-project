@@ -5,22 +5,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 
-@Service
-@ComponentScan
+@Component
+//@ComponentScan
 public class GiftService{
     private JdbcTemplate template;
 
     @Autowired
-    public GiftService(JdbcTemplate template) {
-        this.template = template;
+    public GiftService(DataSource dataSource) {
+        this.template = new JdbcTemplate(dataSource);
     }
 
     private RowMapper<GiftSertificate> ROW_MAPPER = (ResultSet resultSet, int rowNum) -> {

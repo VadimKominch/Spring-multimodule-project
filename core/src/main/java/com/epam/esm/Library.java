@@ -9,15 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Library {
-    @Autowired
+//    @Autowired
     private GiftService service;
 
     public  void startApplication() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.scan("com.epam.esm");
+        context.refresh();
         GiftSertificate certificate = new GiftSertificate();
         certificate.setName("First");
         certificate.setDescription("Test");
+        this.service=context.getBean(GiftService.class);
         service.save(certificate);
     }
 }

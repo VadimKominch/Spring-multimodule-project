@@ -3,11 +3,6 @@
  */
 package com.epam.esm;
 
-import com.epam.esm.entity.GiftSertificate;
-import com.epam.esm.service.GiftService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
