@@ -24,6 +24,7 @@ public class Library {
     public void save(GiftSertificate certificate) {
         service.save(certificate);
     }
+
     public GiftSertificate getById(Integer id) {
         return service.getById(id);
     }
