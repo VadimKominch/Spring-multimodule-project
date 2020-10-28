@@ -5,6 +5,8 @@ package com.epam.esm;
 import com.epam.esm.entity.GiftSertificate;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+
 @Component
 public class App {
     public static void main(String[] args) {

@@ -6,26 +6,25 @@
  * User Manual available at https://docs.gradle.org/6.3/userguide/tutorial_java_projects.html
  */
 
-
+plugins {
     // Apply the application plugin to add support for building a CLI application.
-    apply plugin: 'application'
-    mainClassName = 'com.epam.esm.App'
-
-repositories {
-    // Use jcenter for resolving dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+    id 'war'
 }
 
-run {
-    main = project.getProperty('mainClassName')
+
+repositories {
+    jcenter()
+    mavenCentral()
 }
 
 dependencies {
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:28.2-jre'
-    compile group: 'org.springframework', name: 'spring-jdbc', version: '5.2.9.RELEASE'
     compile project(":core")
+    compile group: 'org.springframework', name: 'spring-jdbc', version: '5.2.9.RELEASE'
+    compile group: 'org.springframework', name: 'spring-web', version: '5.2.9.RELEASE'
+    compile group: 'org.springframework', name: 'spring-webmvc', version: '5.2.9.RELEASE'
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
     // Use JUnit Jupiter API for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
 
