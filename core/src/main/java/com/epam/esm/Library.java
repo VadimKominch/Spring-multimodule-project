@@ -8,16 +8,34 @@ import com.epam.esm.service.GiftService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.List;
+
 public class Library {
-    @Autowired
+
     private GiftService service;
 
     public  void startApplication() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.scan("com.epam.esm");
-        GiftSertificate certificate = new GiftSertificate();
-        certificate.setName("First");
-        certificate.setDescription("Test");
+        context.refresh();
+        this.service=context.getBean(GiftService.class);
+    }
+
+    public void save(GiftSertificate certificate) {
         service.save(certificate);
+    }
+    public GiftSertificate getById(Integer id) {
+        return service.getById(id);
+    }
+
+    public List<GiftSertificate> getAll() {
+        return service.getAll();
+    }
+    public boolean delete(Integer id) {
+        return service.delete(id);
+    }
+
+    public GiftSertificate update(Integer id,GiftSertificate newObj) {
+        return service.update(id,newObj);
     }
 }

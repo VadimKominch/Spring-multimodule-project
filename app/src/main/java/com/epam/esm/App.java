@@ -4,10 +4,6 @@
 package com.epam.esm;
 
 import com.epam.esm.entity.GiftSertificate;
-import com.epam.esm.service.GiftService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,5 +11,11 @@ public class App {
     public static void main(String[] args) {
         Library library = new Library();
         library.startApplication();
+        library.save(new GiftSertificate("Vadim","Kominch"));
+        System.out.println(library.getById(5));
+        System.out.println(library.getAll().size());
+        library.getAll().forEach(System.out::println);
+        library.delete(2);
+        library.update(3,new GiftSertificate("new title","new description"));
     }
 }

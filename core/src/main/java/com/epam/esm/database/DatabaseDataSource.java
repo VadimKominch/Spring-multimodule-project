@@ -8,7 +8,6 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import javax.sql.DataSource;
 
 @Configuration
-//@ComponentScan("com.epam.esm.database")
 public class DatabaseDataSource {
     @Bean
     public DataSource getSource() {
