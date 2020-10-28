@@ -14,8 +14,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
-@EnableWebMvc
-@ComponentScan(basePackages = {"com.epam.esm"})
+
 public class MyWebApplicationInitializer  extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
