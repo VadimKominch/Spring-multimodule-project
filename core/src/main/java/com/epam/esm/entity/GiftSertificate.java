@@ -5,10 +5,10 @@ import java.util.Date;
 public class GiftSertificate {
     private String name;
     private String description;
-    private double price;
+    /*private double price;
     private Date creationDate;
     private Date lastUpdateDate;
-    private double duration;
+    private double duration;*/
 
     public GiftSertificate() {
     }
