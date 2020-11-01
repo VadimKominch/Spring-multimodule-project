@@ -30,4 +30,10 @@ public class MyWebApplicationInitializer  extends AbstractAnnotationConfigDispat
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
+
+    @Override
+    public void onStartup(ServletContext servletContext) throws ServletException {
+        super.onStartup(servletContext);
+        servletContext.setInitParameter("spring.profiles.active","dev");
+    }
 }

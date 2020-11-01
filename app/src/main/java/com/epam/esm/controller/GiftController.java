@@ -2,11 +2,13 @@ package com.epam.esm.controller;
 
 import com.epam.esm.entity.GiftSertificate;
 import com.epam.esm.service.GiftService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.annotation.RequestScope;
 
+import java.util.Date;
 import java.util.List;
 /**
  *
@@ -19,6 +21,8 @@ import java.util.List;
 public class GiftController {
 
     private GiftService giftService;
+    protected static final Logger logger = LogManager.getLogger();
+
     @Autowired
     public GiftController(GiftService giftService) {
         this.giftService = giftService;
@@ -53,6 +57,7 @@ public class GiftController {
     @PostMapping(value="/add")
     @ResponseStatus(HttpStatus.CREATED)
     public String saveEntity(@RequestBody GiftSertificate giftSertificate) {
+        giftSertificate.setCreationDate(new Date());
         giftService.save(giftSertificate);
         return "OK";
     }
@@ -65,7 +70,10 @@ public class GiftController {
     @PostMapping(value = "/add_all")
     @ResponseStatus(HttpStatus.CREATED)
     public String addAll(@RequestBody List<GiftSertificate> certificates) {
-        certificates.forEach(el->giftService.save(el));
+        certificates.forEach(el->{
+            el.setCreationDate(new Date());
+            giftService.save(el);
+        });
         return "OK";
     }
     /**

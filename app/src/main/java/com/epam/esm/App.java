@@ -12,11 +12,11 @@ public class App {
     public static void main(String[] args) {
         Library library = new Library();
         library.startApplication();
-        library.save(new GiftSertificate("Vadim","Kominch"));
+        //library.save(new GiftSertificate("Vadim","Kominch"));
         System.out.println(library.getById(5));
         System.out.println(library.getAll().size());
         library.getAll().forEach(System.out::println);
         library.delete(2);
-        library.update(3,new GiftSertificate("new title","new description"));
+        //library.update(3,new GiftSertificate("new title","new description"));
     }
 }
