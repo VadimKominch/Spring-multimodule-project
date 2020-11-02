@@ -3,27 +3,34 @@ package com.epam.esm.entity;
 
 import com.epam.esm.converter.DateConverter;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class GiftSertificate {
     private String name;
     private String description;
     private double price;
     private String creationDate;
+    private String lastUpdateDate;
 
     private DateConverter converter;
-    /*private Date lastUpdateDate;
-    private double duration;*/
+    private short duration;
+    private List<Tag> tags;
 
     public GiftSertificate() {
         this.converter = new DateConverter();
+        this.tags = new ArrayList<>();
     }
 
-    public GiftSertificate(String name, String description, double price,String creationDate) {
+    public GiftSertificate(String name, String description, double price,String creationDate,String lastUpdateDate,short duration) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.creationDate = creationDate;
+        this.lastUpdateDate = lastUpdateDate;
+        this.duration = duration;
+        this.tags = new ArrayList<>();
         this.converter = new DateConverter();
     }
 
@@ -57,6 +64,30 @@ public class GiftSertificate {
 
     public void setCreationDate(Date date) {
         this.creationDate = converter.formatDate(date);
+    }
+
+    public String getLastUpdateDate() {
+        return lastUpdateDate;
+    }
+
+    public void setLastUpdateDate(Date date) {
+        this.lastUpdateDate = converter.formatDate(date);
+    }
+
+    public short getDuration() {
+        return duration;
+    }
+
+    public void setDuration(short duration) {
+        this.duration = duration;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tagList) {
+        this.tags = tagList;
     }
 
     @Override

@@ -1,7 +1,9 @@
 package com.epam.esm.controller;
 
+import com.epam.esm.dao.GiftDao;
 import com.epam.esm.entity.GiftSertificate;
 import com.epam.esm.service.GiftService;
+import com.epam.esm.service.TagService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +22,14 @@ import java.util.List;
 @RestController
 public class GiftController {
 
+
+    private TagService tagService;
     private GiftService giftService;
     protected static final Logger logger = LogManager.getLogger();
 
     @Autowired
-    public GiftController(GiftService giftService) {
+    public GiftController(GiftService giftService, TagService tagService) {
+        this.tagService = tagService;
         this.giftService = giftService;
     }
 
@@ -57,10 +62,22 @@ public class GiftController {
     @PostMapping(value="/add")
     @ResponseStatus(HttpStatus.CREATED)
     public String saveEntity(@RequestBody GiftSertificate giftSertificate) {
-        giftSertificate.setCreationDate(new Date());
         giftService.save(giftSertificate);
         return "OK";
     }
+
+    @PostMapping(value = "/modify/{id}")
+    public String modifyCertificate(@RequestBody GiftSertificate giftSertificate,@PathVariable int id) {
+        GiftSertificate certificate = giftService.getById(id);
+        if(certificate == null) {
+            giftService.save(giftSertificate); // Status Created
+        } else {
+            giftService.update(id,giftSertificate); //Status OK
+        }
+        return "OK";
+    }
+
+
 
     /**
      * Post method for storing list of data from json format. Entity saved in database. Receive

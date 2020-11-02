@@ -26,7 +26,6 @@ public class TagDao {
     private RowMapper<Tag> ROW_MAPPER = (ResultSet resultSet, int rowNum) -> {
 
         Tag tag = new Tag(resultSet.getString("name"));
-        tag.setDate(resultSet.getTimestamp("date"));
         return tag;
     };
 
@@ -38,14 +37,13 @@ public class TagDao {
     public Tag getById(Integer id) {
         return jdbcTemplate.queryForObject("select * from Tags where id = ?",new Object[]{id},(rs, rowNum) -> {
             Tag tag = new Tag(rs.getString("name"));
-            tag.setDate(rs.getTimestamp("date"));
             return tag;
         });
     }
 
 
     public boolean save(Tag entity) {
-        int result = jdbcTemplate.update("insert into Tags(name,date) values (?,?)",entity.getName(),new Timestamp(new DateConverter().parse(entity.getDate()).getTime()));
+        int result = jdbcTemplate.update("insert into Tags(name) values (?)",entity.getName());
         return result >0;
     }
 

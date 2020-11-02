@@ -2,6 +2,7 @@ package com.epam.esm.controller;
 
 import com.epam.esm.dao.TagDao;
 import com.epam.esm.entity.ErrorResponse;
+import com.epam.esm.entity.GiftSertificate;
 import com.epam.esm.entity.Tag;
 import com.epam.esm.service.TagService;
 import org.apache.logging.log4j.LogManager;
@@ -62,7 +63,6 @@ public class TagController {
     public String saveTag(@RequestBody String name) {
         logger.debug("attempt to save tag ");
         Tag tag = new Tag(name);
-        tag.setDate(new Date());
         tagService.save(tag);
         return "OK";
     }

@@ -1,18 +1,11 @@
 package com.epam.esm.service;
 
-import com.epam.esm.converter.DateConverter;
 import com.epam.esm.dao.GiftDao;
 import com.epam.esm.entity.GiftSertificate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-
 import org.springframework.stereotype.Component;
 
-import javax.sql.DataSource;
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.Timestamp;
+
 import java.util.List;
 
 
