@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 public class GiftSertificate {
+    private int id;
     private String name;
     private String description;
     private double price;
@@ -23,7 +24,8 @@ public class GiftSertificate {
         this.tags = new ArrayList<>();
     }
 
-    public GiftSertificate(String name, String description, double price,String creationDate,String lastUpdateDate,short duration) {
+    public GiftSertificate(int id, String name, String description, double price,String creationDate,String lastUpdateDate,short duration) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
@@ -32,6 +34,14 @@ public class GiftSertificate {
         this.duration = duration;
         this.tags = new ArrayList<>();
         this.converter = new DateConverter();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

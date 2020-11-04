@@ -62,7 +62,7 @@ public class TagController {
     @ResponseStatus(HttpStatus.CREATED)
     public String saveTag(@RequestBody String name) {
         logger.debug("attempt to save tag ");
-        Tag tag = new Tag(name);
+        Tag tag = new Tag(name,0);
         tagService.save(tag);
         return "OK";
     }

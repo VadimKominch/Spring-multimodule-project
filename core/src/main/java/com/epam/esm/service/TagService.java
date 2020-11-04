@@ -37,7 +37,7 @@ public class TagService {
     }
 
 
-    public boolean save(Tag entity) {
+    public Tag save(Tag entity) {
         return tagDao.save(entity);
     }
 
