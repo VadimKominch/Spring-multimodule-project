@@ -28,8 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * */
 
 
-@WebAppConfiguration
-@ContextConfiguration(classes = {DatabaseDataSource.class, MyWebApplicationInitializer.class,SpringConfig.class})
+@ContextConfiguration(classes = DatabaseDataSource.class)
 class ServiceTest {
 
     private static GiftService giftService;
@@ -63,17 +62,17 @@ class ServiceTest {
     @Test
     void checkForGettingById() {
         int checkedId = 3;
-        assertEquals(testCertificates.get(checkedId-1),giftService.getById(checkedId));
+        assertEquals(testCertificates.get(checkedId-1),giftService.getById(checkedId).getBody());
     }
 
     @Test
     void checkForGetByIdForNonExistingEntity() {
-        assertNull(giftService.getById(20));
+        assertTrue(giftService.getById(20).getStatusCode().is4xxClientError());
     }
 
     @Test
     void checkIfValidDataWillBeSaved() {
-        assertTrue(giftService.save(testCertificates.get(2)));
+        assertTrue(giftService.save(testCertificates.get(2)).getStatusCode().is2xxSuccessful());
         giftService.delete(TEST_CERTIFICATES_COUNT+1);
     }
 
@@ -83,9 +82,8 @@ class ServiceTest {
      * */
     @Test
     void checkIfElementWithValidIdWillBeChangedInDb() {
-        assertTrue(giftService.save(testCertificates.get(2)));
         giftService.update(TEST_CERTIFICATES_COUNT+2,testCertificates.get(0));
-        assertEquals(testCertificates.get(0),giftService.getById(TEST_CERTIFICATES_COUNT+2));
+        assertEquals(testCertificates.get(0),giftService.getById(TEST_CERTIFICATES_COUNT+2).getBody());
     }
 
 
