@@ -1,6 +1,8 @@
 package com.epam.esm.databaseTest;
 
 
+import com.epam.esm.MyWebApplicationInitializer;
+import com.epam.esm.SpringConfig;
 import com.epam.esm.converter.DateConverter;
 import com.epam.esm.database.DatabaseDataSource;
 import com.epam.esm.entity.GiftSertificate;
@@ -12,6 +14,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -25,8 +28,8 @@ import static org.junit.jupiter.api.Assertions.*;
  * */
 
 
-
-@ContextConfiguration(classes = DatabaseDataSource.class)
+@WebAppConfiguration
+@ContextConfiguration(classes = {DatabaseDataSource.class, MyWebApplicationInitializer.class,SpringConfig.class})
 class ServiceTest {
 
     private static GiftService giftService;
