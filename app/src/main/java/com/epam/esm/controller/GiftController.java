@@ -1,6 +1,8 @@
 package com.epam.esm.controller;
 
+import com.epam.esm.constant.CustomErrorCodes;
 import com.epam.esm.dao.GiftDao;
+import com.epam.esm.entity.ErrorResponse;
 import com.epam.esm.entity.GiftSertificate;
 import com.epam.esm.entity.Tag;
 import com.epam.esm.service.GiftService;
@@ -9,10 +11,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,7 +48,7 @@ public class GiftController {
  * and find entity in database.
  * */
     @GetMapping(value = "/{id}")
-    public GiftSertificate getGiftById(@PathVariable int id) {
+    public ResponseEntity<?> getGiftById(@PathVariable int id) {
         return giftService.getById(id);
     }
 /**
@@ -85,23 +86,21 @@ public class GiftController {
      * */
     @PostMapping(value="/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public String saveEntity(@RequestBody GiftSertificate giftSertificate) {
-        giftService.save(giftSertificate);
-        return "OK";
+    public ResponseEntity<?> saveEntity(@RequestBody GiftSertificate giftSertificate) {
+        return giftService.save(giftSertificate);
     }
 /**
  * Rest endpoint for modifying certificate. Receive json body of new entity object.
  * @param id id of changing entity
  * */
     @PostMapping(value = "/modify/{id}")
-    public String modifyCertificate(@RequestBody GiftSertificate giftSertificate,@PathVariable int id) {
-        GiftSertificate certificate = giftService.getById(id);
-        if(certificate == null) {
-            giftService.save(giftSertificate); // Status Created
+    public ResponseEntity<?> modifyCertificate(@RequestBody GiftSertificate giftSertificate,@PathVariable int id) {
+
+        if(!giftService.getById(id).getStatusCode().is2xxSuccessful()) {
+            return giftService.save(giftSertificate); // Status Created
         } else {
-            giftService.update(id,giftSertificate); //Status OK
+            return giftService.update(id,giftSertificate); //Status OK
         }
-        return "OK";
     }
 
 
@@ -125,9 +124,7 @@ public class GiftController {
      * and find entity with id in database.
      * */
     @DeleteMapping("delete/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public String deleteOne(@PathVariable int id) {
-        giftService.delete(id);
-        return "OK";
+    public ResponseEntity<?> deleteOne(@PathVariable int id) {
+        return giftService.delete(id);
     }
 }

@@ -1,1 +1,1 @@
-insert into Certificates values('title','hello');
+insert into Certificates values('title','hello',0.2,);

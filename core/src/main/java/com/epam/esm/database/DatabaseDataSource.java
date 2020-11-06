@@ -39,6 +39,5 @@ public class DatabaseDataSource {
                 .setType(EmbeddedDatabaseType.H2)
                 .setScriptEncoding("UTF-8")
                 .addScript("init-h2.sql")
-                .addScript("insert.sql")
                 .build();
     }}

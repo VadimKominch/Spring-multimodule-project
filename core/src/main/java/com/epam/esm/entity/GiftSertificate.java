@@ -6,6 +6,7 @@ import com.epam.esm.converter.DateConverter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class GiftSertificate {
     private int id;
@@ -103,8 +104,32 @@ public class GiftSertificate {
     @Override
     public String toString() {
         return "GiftSertificate{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", price=" + price +
+                ", creationDate='" + creationDate + '\'' +
+                ", lastUpdateDate='" + lastUpdateDate + '\'' +
+                ", converter=" + converter +
+                ", duration=" + duration +
+                ", tags=" + tags +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GiftSertificate)) return false;
+        GiftSertificate that = (GiftSertificate) o;
+        return Double.compare(that.price, price) == 0 &&
+                duration == that.duration &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(tags, that.tags);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, description, price, creationDate, lastUpdateDate, converter, duration, tags);
     }
 }

@@ -53,7 +53,6 @@ public class GiftDao {
 
     public GiftSertificate getById(Integer id) {
         List <Tag> tags = template.query("select * from tags join certificates_tags on tags.id = certificates_tags.tag_id where certificates_tags.certificate_id = ?",new Object[]{id},TAG_ROW_MAPPER);
-
         GiftSertificate certificate =  template.queryForObject("select * from Certificates where id = ?", new Object[]{id}, (rs, rowNum) ->
                 new GiftSertificate(
                         rs.getInt("id"),
